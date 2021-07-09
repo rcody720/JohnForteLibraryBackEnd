@@ -23,13 +23,19 @@ mono_crash.*
 [Rr]eleases/
 x64/
 x86/
+<<<<<<< HEAD
 [Ww][Ii][Nn]32/
+=======
+>>>>>>> e184d13d9048ef6945e3a3e496a1e34894133e0b
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
+<<<<<<< HEAD
 [Oo]ut/
+=======
+>>>>>>> e184d13d9048ef6945e3a3e496a1e34894133e0b
 [Ll]og/
 [Ll]ogs/
 
@@ -62,8 +68,12 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+<<<<<<< HEAD
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
+=======
+
+>>>>>>> e184d13d9048ef6945e3a3e496a1e34894133e0b
 # StyleCop
 StyleCopReport.xml
 
@@ -140,11 +150,14 @@ _TeamCity*
 .axoCover/*
 !.axoCover/settings.json
 
+<<<<<<< HEAD
 # Coverlet is a free, cross platform Code Coverage Tool
 coverage*.json
 coverage*.xml
 coverage*.info
 
+=======
+>>>>>>> e184d13d9048ef6945e3a3e496a1e34894133e0b
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
@@ -356,6 +369,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+<<<<<<< HEAD
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+=======
+>>>>>>> e184d13d9048ef6945e3a3e496a1e34894133e0b
