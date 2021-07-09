@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.API\\JohnForteLibrary.API.csproj": {}
+  },
+  "projects": {
+    "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.API\\JohnForteLibrary.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.API\\JohnForteLibrary.API.csproj",
+        "projectName": "JohnForteLibrary.API",
+        "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.API\\JohnForteLibrary.API.csproj",
+        "packagesPath": "C:\\Users\\creeves\\.nuget\\packages\\",
+        "outputPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\creeves\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj": {
+                "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj"
+              },
+              "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\JohnForteLibrary.Repositories.csproj": {
+                "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\JohnForteLibrary.Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.1.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj",
+        "projectName": "JohnForteLibrary.Domain",
+        "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj",
+        "packagesPath": "C:\\Users\\creeves\\.nuget\\packages\\",
+        "outputPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\creeves\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "CSharpFunctionalExtensions": {
+              "target": "Package",
+              "version": "[2.15.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\JohnForteLibrary.Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\JohnForteLibrary.Repositories.csproj",
+        "projectName": "JohnForteLibrary.Repositories",
+        "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\JohnForteLibrary.Repositories.csproj",
+        "packagesPath": "C:\\Users\\creeves\\.nuget\\packages\\",
+        "outputPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\creeves\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj": {
+                "projectPath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

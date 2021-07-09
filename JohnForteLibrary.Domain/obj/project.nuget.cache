@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "JXAkdQBWe+DXgl3eZnk6DdVDO29sCrxIXBOAqNdFeO/69qOAZ4j36iyUbwp/Mgsq0ZpKPh9wQKuBDnwqia1p0w==",
+  "success": true,
+  "projectFilePath": "C:\\MyApps\\InternJohnForteLibrary\\JohnForteLibrary.Domain\\JohnForteLibrary.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\creeves\\.nuget\\packages\\csharpfunctionalextensions\\2.15.3\\csharpfunctionalextensions.2.15.3.nupkg.sha512"
+  ],
+  "logs": []
+}

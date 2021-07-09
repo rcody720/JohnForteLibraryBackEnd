@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\creeves\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\creeves\\.nuget\\packages"
+    ]
+  }
+}
