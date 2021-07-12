@@ -1,0 +1,441 @@
+USE [master]
+GO
+/****** Object:  Database [JohnForteLibrary]    Script Date: 7/12/2021 11:05:27 AM ******/
+CREATE DATABASE [JohnForteLibrary]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'JohnForteLibrary', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\JohnForteLibrary.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'JohnForteLibrary_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\JohnForteLibrary_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [JohnForteLibrary] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [JohnForteLibrary].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [JohnForteLibrary] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [JohnForteLibrary] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [JohnForteLibrary] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [JohnForteLibrary] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [JohnForteLibrary] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET RECOVERY FULL 
+GO
+ALTER DATABASE [JohnForteLibrary] SET  MULTI_USER 
+GO
+ALTER DATABASE [JohnForteLibrary] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [JohnForteLibrary] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [JohnForteLibrary] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [JohnForteLibrary] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [JohnForteLibrary] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [JohnForteLibrary] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'JohnForteLibrary', N'ON'
+GO
+ALTER DATABASE [JohnForteLibrary] SET QUERY_STORE = OFF
+GO
+USE [JohnForteLibrary]
+GO
+/****** Object:  Table [dbo].[Authors]    Script Date: 7/12/2021 11:05:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Authors](
+	[AuthorId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Authors] PRIMARY KEY CLUSTERED 
+(
+	[AuthorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BookAuthor]    Script Date: 7/12/2021 11:05:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookAuthor](
+	[BooksId] [int] NOT NULL,
+	[AuthorsId] [int] NOT NULL,
+ CONSTRAINT [PK_BookAuthor] PRIMARY KEY CLUSTERED 
+(
+	[BooksId] ASC,
+	[AuthorsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Books]    Script Date: 7/12/2021 11:05:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Books](
+	[BookId] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [varchar](200) NOT NULL,
+	[ISBN] [varchar](20) NOT NULL,
+	[PublishedYear] [int] NULL,
+	[IsCheckedOut] [bit] NULL,
+	[PatronId] [int] NULL,
+	[CheckedOutDate] [datetime2](7) NULL,
+	[DueDate] [datetime2](7) NULL,
+ CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED 
+(
+	[BookId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Patrons]    Script Date: 7/12/2021 11:05:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Patrons](
+	[PatronId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[PhoneNumber] [varchar](15) NULL,
+	[Email] [varchar](100) NULL,
+	[CardNumber] [varchar](14) NOT NULL,
+	[StreetAddress] [varchar](100) NOT NULL,
+	[City] [varchar](30) NOT NULL,
+	[State] [varchar](2) NOT NULL,
+	[ZipCode] [varchar](10) NOT NULL,
+ CONSTRAINT [PK_LibraryCards] PRIMARY KEY CLUSTERED 
+(
+	[PatronId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Authors] ON 
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (9, N'J.R.R. Tolkien')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (10, N'C.S. Lewis')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (11, N'John Piper')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (12, N'J.K. Rowling')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (13, N'Tom Clancy')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (14, N'William Shakespeare')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (15, N'Charles Dickens')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (16, N'George Orwell')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (17, N'Dr. Suess')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (18, N'Suzanne Collins')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (19, N'Leo Tolstoy')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (20, N'Harper Lee')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (21, N'Mary Shelley')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (22, N'F. Scott Fitzgerald')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (23, N'Jane Austen')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (24, N'Mark Twain')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (33, N'Stephen Jones')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (34, N'braden cooney')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (36, N'Charles Portis')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (37, N'Gabriel Garcia Marquez')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (38, N'Truman Capote')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (39, N'Jean Rhys')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (40, N'Andrea Ashworth')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (41, N'Aldous Huxley')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (42, N'Dodie Smith')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (43, N'Charlotte Bronte')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (44, N'Stevie Davies')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (45, N'Fyodor Dostoyevsky')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (46, N'David McDuff')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (47, N'Jack London')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (48, N'Melvin Burgess')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (49, N'John Wyndham')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (50, N'J.M. Barrie')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (51, N'John Kennedy Toole')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (52, N'Herman Melville')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (53, N'Virginia Woolf')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (54, N'John Steinbeck')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (55, N'Charlotte Mitchell')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (56, N'Joseph Heller')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (57, N'Salman Rushdie')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (58, N'Homer')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (59, N'Martin Hammond')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (60, N'William Makepeace Thackeray')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (61, N'J.D. Salinger')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (62, N'Lewis Carroll')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (63, N'John Tenniel')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (64, N'George Eliot')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (65, N'Anthony Trollope')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (66, N'James Baldwin')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (67, N'Victor Hugo')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (68, N'Robert Tombs')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (69, N'Christine Donougher')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (70, N'Roald Dahl')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (71, N'S.E. Hinton')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (72, N'Emily Bronte')
+GO
+INSERT [dbo].[Authors] ([AuthorId], [Name]) VALUES (73, N'James Patterson')
+GO
+SET IDENTITY_INSERT [dbo].[Authors] OFF
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (7, 9)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (7, 10)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (8, 10)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (8, 11)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (12, 10)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (12, 14)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (12, 15)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (18, 9)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (117, 22)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (134, 45)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (134, 46)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (139, 21)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (143, 56)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (147, 58)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (147, 59)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (148, 60)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (149, 61)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (155, 37)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (156, 67)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (156, 68)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (156, 69)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (157, 50)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (158, 64)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (160, 54)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (163, 15)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (163, 55)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (169, 47)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (169, 48)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (171, 73)
+GO
+INSERT [dbo].[BookAuthor] ([BooksId], [AuthorsId]) VALUES (173, 23)
+GO
+SET IDENTITY_INSERT [dbo].[Books] ON 
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (7, N'Lord of the Rings', N'0261103253', 1960, 0, 2, CAST(N'2021-07-02T14:59:55.1820426' AS DateTime2), CAST(N'2021-07-23T14:59:55.1823828' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (8, N'The Lion, the Witch, and the Wardrobe', N'0064404994', 1940, 0, NULL, CAST(N'2021-07-06T12:00:07.2324046' AS DateTime2), CAST(N'2021-07-27T12:00:07.2324151' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (12, N'Othello', N'0743477553', 1650, 1, 2, CAST(N'2021-07-07T09:59:54.8881791' AS DateTime2), CAST(N'2021-07-01T09:59:54.8888518' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (18, N'Return of the King', N'0345339738', 1950, 0, NULL, CAST(N'2021-07-07T08:22:20.8125217' AS DateTime2), CAST(N'2021-07-28T08:22:20.8125377' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (117, N'The Great Gatsby', N'9780141182636', 2000, 0, NULL, CAST(N'2021-07-07T09:44:44.8509709' AS DateTime2), CAST(N'2021-07-28T09:44:44.8574954' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (134, N'Crime and Punishment', N'9780140449136', 2003, 0, NULL, CAST(N'2021-07-07T09:56:41.5758842' AS DateTime2), CAST(N'2021-07-28T09:56:41.5767077' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (139, N'Frankenstein', N'9780141198965', 2012, 0, NULL, CAST(N'2021-07-06T17:27:44.8412048' AS DateTime2), CAST(N'2021-07-27T17:27:44.8418159' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (143, N'Catch-22', N'9780099470465', 2004, 0, 2, CAST(N'2021-07-02T10:49:31.8775258' AS DateTime2), CAST(N'2021-07-23T10:49:31.8775293' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (147, N'The Iliad', N'9780140444445', 1987, 0, NULL, CAST(N'2021-07-06T17:26:33.3923632' AS DateTime2), CAST(N'2021-07-27T17:26:33.3929072' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (148, N'Vanity Fair', N'9780141199542', 2013, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (149, N'The Catcher in the Rye', N'9780241950432', 2010, 0, NULL, CAST(N'2021-07-06T17:29:31.7527714' AS DateTime2), CAST(N'2021-07-27T17:29:31.7528213' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (155, N'One Hundred Years of Solitude', N'9780241968581', 2014, 0, NULL, CAST(N'2021-07-06T17:18:32.9150230' AS DateTime2), CAST(N'2021-07-27T17:18:32.9155459' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (156, N'Les Miserables', N'9780241248744', 2015, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (157, N'Peter Pan', N'9780141322575', 2008, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (158, N'The Mill on the Floss', N'9780141439624', 2003, 0, 2, CAST(N'2021-07-02T11:48:24.6552093' AS DateTime2), CAST(N'2021-07-23T11:48:24.6552124' AS DateTime2))
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (160, N'The Grapes of Wrath', N'9780141185064', 2000, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (163, N'Great Expectations', N'9780141439563', 2003, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (169, N'The Call of the Wild', N'9780141321059', 2008, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (171, N'2 Sisters Detective Agency', N'9781538704592', 2021, 0, NULL, NULL, NULL)
+GO
+INSERT [dbo].[Books] ([BookId], [Title], [ISBN], [PublishedYear], [IsCheckedOut], [PatronId], [CheckedOutDate], [DueDate]) VALUES (173, N'Pride and Prejudice', N'9780141199078', 2012, 0, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Books] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Patrons] ON 
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (2, N'Alex', N'Wilson', N'8168858510', N'awilson@gmail.com', N'12345678901235', N'212 Grover Street', N'Warrensburg', N'MO', N'64093')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (3, N'Braden', N'Cooney', N'8162105412', N'braden@gmail.com', N'12345678901234', N'10801 NE Blackwell Rd.', N'Lee''s Summit', N'MD', N'64086')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (5, N'Cody', N'Reeves', N'9132812839', N'rcody@gmail.com', N'30378672270418', N'19382 125th St.', N'Olathe', N'FL', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (6, N'Martin', N'Smith', N'(913)-291-3921', N'msmith@gmail.com', N'70861286374627', N'28492 183rd St.', N'Overland Park', N'CA', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (7, N'Joe', N'Wallace', N'913-242-4321', N'wallacej@gmail.com', N'60448565070343', N'39204 180th St.', N'Merriam', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (8, N'Henry', N'Mills', N'816-294-2938', N'hmills@yahoo.com', N'24663018056216', N'29482 145th Rd.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (9, N'John', N'Alan', N'393-193-3932', N'jalan@gmail.com', N'45652783047025', N'94382 50th Rd.', N'Tulsa', N'OK', N'39483')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (10, N'Bob', N'Joe', N'924-293-3849', N'joeb@gmail.com', N'20648300128465', N'19484 100th St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (11, N'Joseph', N'', N'1928392039', N'joseph@gmail', N'37674487174020', N'19283 13th St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (13, N'Jack', N'', N'283-384-3848', N'jackb@gmail.com', N'88515148866074', N'12934 135th St.', N'Olathe', N'KS', N'66023')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (14, N'Bill', N'', N'3843843849', N'bill@gmail.com', N'56685156276822', N'12948 141st St.', N'Chicago', N'IL', N'93920')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (15, N'Craig', N'', N'2948204932', N'craig@gmail.com', N'44738542042122', N'19385 293rd St.', N'Chicago', N'IL', N'39485')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (16, N'Zach', N'Donald', N'3924932938', N'zachd@gmail.com', N'27265642881446', N'29304 120th St.', N'New York City', N'NY', N'39483')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (17, N'Donald', N'Jeffery', N'3920493829', N'donaldj@gmail.com', N'30745542811206', N'39201 394rth Rd.', N'Wichita', N'KS', N'59483')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (18, N'Jeffery', N'Zach', N'3943948394', N'jefferyz@gmail.com', N'34618377120536', N'29302 193rd St.', N'Chicago', N'IL', N'39482')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (19, N'Jeff', N'Mills', N'2938293947', N'jeff.mills@gmail.com', N'14854418541854', N'29302 392nd St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (20, N'John', N'Woods', N'2939203920', N'johnlwoods@gmail.com', N'25850845784557', N'39203 923rd St.', N'Chicago', N'IL', N'39402')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (21, N'Jeff', N'Martin', N'3392939493', N'jmartin@gmail.com', N'27674753578218', N'29939 394rth St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (22, N'Isaac', N'Jones', N'2938293849', N'ijones@gmail.com', N'70765657506013', N'93283 392nd St.', N'Chicago', N'IL', N'39283')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (23, N'Josh', N'Jones', N'3948392039', N'jj@gmail.com', N'60703588573308', N'39483 932nd St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (24, N'Martin', N'Henry', N'', N'', N'47767780811656', N'39483 294th St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (25, N'Pierre', N'Smith', N'2933943829', N'psmith@gmail.com', N'43265886865558', N'29384 294th St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (26, N'Bob', N'Allen', N'193-293-1928', N'boba@gmail.com', N'05624847170082', N'19329 932nd St.', N'Olathe', N'KS', N'66062')
+GO
+INSERT [dbo].[Patrons] ([PatronId], [FirstName], [LastName], [PhoneNumber], [Email], [CardNumber], [StreetAddress], [City], [State], [ZipCode]) VALUES (27, N'Gary ', N'Martin', N'293-239-2930', N'gmartin@gmail.com', N'66627238018326', N'10291 135th St.', N'Chicago', N'IL', N'29382')
+GO
+SET IDENTITY_INSERT [dbo].[Patrons] OFF
+GO
+ALTER TABLE [dbo].[BookAuthor]  WITH CHECK ADD  CONSTRAINT [FK_BookAuthor_Authors] FOREIGN KEY([AuthorsId])
+REFERENCES [dbo].[Authors] ([AuthorId])
+GO
+ALTER TABLE [dbo].[BookAuthor] CHECK CONSTRAINT [FK_BookAuthor_Authors]
+GO
+ALTER TABLE [dbo].[BookAuthor]  WITH CHECK ADD  CONSTRAINT [FK_BookAuthor_Books] FOREIGN KEY([BooksId])
+REFERENCES [dbo].[Books] ([BookId])
+GO
+ALTER TABLE [dbo].[BookAuthor] CHECK CONSTRAINT [FK_BookAuthor_Books]
+GO
+USE [master]
+GO
+ALTER DATABASE [JohnForteLibrary] SET  READ_WRITE 
+GO
